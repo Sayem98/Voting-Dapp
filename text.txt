@@ -1,0 +1,171 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import './AllVoter.sol';
+contract Vote{
+    struct Candidate{
+        string logo; //Maybe an NFT? Who ever has the NFT wins
+        bool isCandidate;
+        uint votes;
+    }
+    
+    mapping(address=>Candidate) public candidates;
+    address[] public candidatelist;
+
+    address[] public voted;
+
+    mapping(address=>bool) isVoted;
+
+    uint public startTime;
+    uint public endTime;
+    //Changes when All Voter is redeployed.
+    address contractVoter = 0xd2a5bC10698FD955D1Fe6cb468a17809A08fd005;
+    
+    AllVoter Voter = AllVoter(contractVoter);
+
+    /* Events */
+    // New Candidate event.
+
+    event NewCandidateEvent(address indexed candidate, string logo);
+    event VoteEvent(address indexed candidate);
+
+    modifier logoUsed(string calldata _logo){
+        //Cheacking for logo if already exists.
+        //May not need while using NFT
+        for(uint i; i<candidatelist.length; i++){
+            Candidate storage tempCand = candidates[msg.sender];
+
+            if(keccak256(abi.encode(tempCand.logo)) == keccak256(abi.encode(_logo))){
+                revert('LOGO already in use');
+            }
+        }
+        _;
+    }
+
+
+    constructor(uint _startTime, uint _endTime){
+        startTime = _startTime;
+        endTime = _endTime;
+    }
+
+
+
+    // Every candidate have to give some money for joining. Shoud be here?
+    function addCandiate(string calldata _logo) logoUsed(_logo) public {
+        //Checking time has passed to be a candidate.
+        require(startTime>=block.timestamp, 'Time has passed');
+
+        Candidate storage candidate = candidates[msg.sender];
+        //Checking for address already candidate
+        require(candidate.isCandidate == false, 'You are already candidate');
+
+        candidate.logo = _logo;
+        candidate.isCandidate = true;
+        candidatelist.push(msg.sender);
+
+        emit NewCandidateEvent(msg.sender, _logo);
+
+
+    }
+
+    /*
+    Need to  verify the voters. but how?
+    */
+
+    
+    // Need to check is voter or not?
+    function vote(address _Candidate, uint _id) public {
+        require(block.timestamp>=startTime && block.timestamp<=endTime, 'Can not vote');
+        require(isVoted[msg.sender] == false, 'Already voted');
+        if(Voter.Check(_id, msg.sender) == false){
+            revert('Not your ID');
+        }
+        Candidate storage candidate = candidates[_Candidate];
+        candidate.votes = candidate.votes+1;
+        isVoted[msg.sender] = true;
+        voted.push(msg.sender);
+
+        emit VoteEvent(_Candidate);
+
+
+    }
+    //Getting the winner.
+    function Winner() external view returns(uint highest_vote){
+        require(block.timestamp>=endTime, 'Voting not finished yet.');
+        
+        for(uint i; i<candidatelist.length;i++){
+            Candidate storage candidate = candidates[candidatelist[i]];
+            if(candidate.votes>highest_vote){
+                highest_vote = candidate.votes;
+            }
+        }
+    }
+
+    
+
+
+    
+
+
+
+
+
+
+
+}
+
+
+
+-------------------------------------------------------
+
+
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+
+contract AllVoter{
+    struct Voter{
+        uint id;
+        //Other info if needed
+    }
+
+    address private immutable Owner;
+    uint public numberOfVoter;
+
+    mapping(address=>Voter) public voters;
+
+
+    event NewVoterEvent(address indexed addr, uint indexed id);
+
+    constructor(){
+        Owner = msg.sender;
+    }
+
+    function addVoter(address _voter, uint _id) external {
+        require(Owner == msg.sender, 'You are not allowed.');
+
+        Voter storage voter = voters[_voter];
+
+        voter.id = _id;
+        numberOfVoter = numberOfVoter + 1;
+
+        emit NewVoterEvent(_voter, _id);
+
+    }
+
+    function Check(uint _id, address _owner) external view returns(bool isOwnder){
+        Voter storage voter = voters[_owner];
+        if(voter.id == _id){
+            isOwnder = true;
+        }
+    }
+
+    
+
+
+}
+
+
+-----------------------------------------------------------------------
+
+
