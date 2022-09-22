@@ -7,7 +7,7 @@ import './AllVoter.sol';
 contract Voting is IVote{
 
     //Finally cadidates will come from candidate selection procces.
-    address[] public candidates = [0x8D2dA10B7E52cdfb286a1c4bCaAEa0f2629e775B,0xBFcedD4d69D456694B5414B2fD8226486B531A02];
+    address[] public candidates = [0x50b828c09B142f8B31d201155e54E545F5C6505D,0x0cf3bb1475b340Df0502ab4BbeFc33732dEB5bd1];
     uint public numberOfCandidates = 2;
     mapping(address=>uint) votes;
 
