@@ -1,0 +1,14 @@
+.page {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 10);
+  margin: 20px 0;
+  width: 200vh;
+  height: 90vh;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
