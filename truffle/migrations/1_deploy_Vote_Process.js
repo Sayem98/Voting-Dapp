@@ -1,14 +1,6 @@
 const Voting = artifacts.require("Voting");
-const AllVoter = artifacts.require("AllVoter");
+const AllvoterAddress = "0x30980234cEa6E7570c0089938Ef320633C22611d";
 module.exports = function (deployer) {
-  const deploy = async () => {
-    AllVoter_instance = await deployer.deploy(AllVoter);
-    console.log(AllVoter_instance.address);
-    let VotingInstance = await deployer.deploy(
-      Voting,
-      AllVoter_instance.address
-    );
-  };
-  deploy();
-  // console.log(AllVoter_instance.address);
+  console.log("Deploying Voting");
+  deployer.deploy(Voting, AllvoterAddress);
 };
