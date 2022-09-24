@@ -16,7 +16,7 @@ contract Voting is IVote{
 
     uint public startTime;
     uint public endTime;
-    AllVoter Voter;
+    AllVoter public Voter;
 
     
     
@@ -71,4 +71,7 @@ contract Voting is IVote{
             }
         }
     }
+
+
+
 }
