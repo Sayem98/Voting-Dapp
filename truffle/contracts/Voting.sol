@@ -7,8 +7,8 @@ import './AllVoter.sol';
 contract Voting is IVote{
 
     //Finally cadidates will come from candidate selection procces.
-    address[] public candidates = [0x50b828c09B142f8B31d201155e54E545F5C6505D,0x0cf3bb1475b340Df0502ab4BbeFc33732dEB5bd1];
-    uint public numberOfCandidates = 2;
+    address[] public candidates = [0x50b828c09B142f8B31d201155e54E545F5C6505D,0x0cf3bb1475b340Df0502ab4BbeFc33732dEB5bd1, 0xc1AE8c374fd410E960b69DC80309c4bcB1736560, 0x3605D2b4C63071e1bd5E39896d887A48C92C7E09];
+    uint public numberOfCandidates = 4;
     mapping(address=>uint) votes;
 
     address[] public voted_persons;
@@ -36,10 +36,10 @@ contract Voting is IVote{
     function Vote(address candidate, uint NID) external{
         // require(block.timestamp>=startTime && block.timestamp<=endTime, 'Can not vote');
         require(isVoted[msg.sender] == false, 'Already voted');
-        if(Voter.Check(NID, msg.sender) == false){
-            revert('Not your ID');
-        }
-
+        // if(Voter.Check(NID, msg.sender) == false){
+        //     revert('Not your ID');
+        // }
+        NID = NID;
         uint count;
         for(uint i;i<numberOfCandidates;i++){
             if(candidate != candidates[i]){
@@ -57,6 +57,10 @@ contract Voting is IVote{
 
         emit VoteEvent(candidate);
 
+    }
+
+    function myVote(address _candidate) external view returns(uint){
+        return votes[_candidate];
     }
 
     function Winner() external view returns(address winner){

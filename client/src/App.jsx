@@ -1,5 +1,5 @@
 import { EthProvider } from "./contexts/EthContext";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Page from "./components/Page";
 
