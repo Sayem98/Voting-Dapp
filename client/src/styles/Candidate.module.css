@@ -1,9 +1,10 @@
 .candidate {
   margin: 1rem;
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 5);
   font-size: 1vw;
+  height: 50vh;
 }
 
 .title {

@@ -26,7 +26,7 @@ function Candidate({ candidate, NID }) {
       });
     };
     const getVotes = async () => {
-      const _votes = await contract.methods.myVote(candidate).call();
+      const _votes = await contract.methods.VotesToCandidate(candidate).call();
       console.log(_votes);
       setVotes(_votes);
     };
@@ -53,7 +53,7 @@ function Candidate({ candidate, NID }) {
       <Card.Img variant="top" src={image} />
       <Card.Body>
         <Card.Title className={classes.title}>{candidate}</Card.Title>
-        <Card.Text>My Votes: {votes}</Card.Text>
+        <Card.Text>Votes: {votes}</Card.Text>
         <Button variant="outline-dark" onClick={handleClick}>
           Vote
         </Button>

@@ -27,7 +27,7 @@ function Vote() {
   }, [contract]);
   return (
     <div className={classes.vote}>
-      <h2>Voting System</h2>
+      
       <div className={classes.candidates}>
         {candidates.map((candidate, index) => (
           <Candidate candidate={candidate} NID="109" key={index} />

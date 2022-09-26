@@ -8,7 +8,57 @@
   height: 90vh;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+.heading1 {
+  display: inline;
+  width: 20%;
+  height: 85%;
+  background-color: wheat;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 2vw;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 10);
+}
+
+.heading2 {
+  font-size: 1.8vw;
+  background: whitesmoke;
+}
+
+.click {
+  width: 10%;
+  height: 7%;
+  font-size: 1.5vw;
+}
+.err {
+  color: red;
+  font-size: 1.5vw;
+}
+p {
+  color: rgb(20, 179, 20);
+  font-size: 2vw;
+}
+.container {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.nav {
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+  margin-left: 10px;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 2vw;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 10);
+  list-style-type: none;
+  padding: 1rem;
 }
