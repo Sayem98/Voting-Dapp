@@ -22,3 +22,20 @@
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 5);
 }
+.heading2 {
+  font-size: 1.8vw;
+  background: whitesmoke;
+}
+.click {
+  width: 20%;
+  height: 10%;
+  font-size: 1.5vw;
+}
+.err {
+  color: red;
+  font-size: 1.5vw;
+}
+p {
+  color: rgb(20, 179, 20);
+  font-size: 2vw;
+}
