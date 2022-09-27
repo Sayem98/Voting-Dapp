@@ -4,10 +4,10 @@
   align-items: center;
   justify-content: center;
 
-  background-color: #f5f5f5;
-
-  width: 60%;
-  height: 70%;
+  width: 80%;
+  height: 100%;
+  flex: start;
+  padding: 1rem;
 }
 
 .candidates {
@@ -20,16 +20,19 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 5);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 .heading2 {
   font-size: 1.8vw;
   background: whitesmoke;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .click {
   width: 20%;
   height: 10%;
   font-size: 1.5vw;
+  margin-bottom: 10px;
 }
 .err {
   color: red;

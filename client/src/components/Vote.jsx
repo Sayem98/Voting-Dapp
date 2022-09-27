@@ -66,8 +66,6 @@ function Vote() {
         </>
       )}
 
-      <h2 className={classes.heading2}>Candidates</h2>
-
       <div className={classes.candidates}>
         {candidates.map((candidate, index) => (
           <Candidate candidate={candidate} NID="109" key={index} />

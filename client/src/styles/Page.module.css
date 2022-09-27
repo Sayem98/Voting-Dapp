@@ -2,7 +2,7 @@
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 10);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   margin: 20px 0;
   width: 200vh;
   height: 90vh;
@@ -16,13 +16,14 @@
   display: inline;
   width: 20%;
   height: 85%;
-  background-color: wheat;
+  background-color: whitesmoke;
   padding: 1rem;
   border-radius: 10px;
   text-align: center;
   font-size: 2vw;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 10);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   text-decoration: none;
+  color: rgb(100, 218, 100);
 }
 
 .container {
@@ -36,12 +37,12 @@
   justify-content: space-evenly;
   width: 40%;
   margin-left: 10px;
-  background-color: white;
+  background-color: whitesmoke;
   padding: 1rem;
   border-radius: 10px;
   text-align: center;
   font-size: 2vw;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 10);
+  
   list-style-type: none;
   padding: 1rem;
   text-decoration: none;
@@ -49,4 +50,7 @@
 .navItem {
   text-decoration: none;
   color: black;
+
+  border-radius: 10px;
+  padding: 0.3rem;
 }

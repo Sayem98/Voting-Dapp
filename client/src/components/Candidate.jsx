@@ -54,7 +54,7 @@ function Candidate({ candidate, NID }) {
       <Card.Body>
         <Card.Title className={classes.title}>{candidate}</Card.Title>
         <Card.Text>Votes: {votes}</Card.Text>
-        <Button variant="outline-dark" onClick={handleClick}>
+        <Button variant="outline-dark" onClick={handleClick} className={classes.button}>
           Vote
         </Button>
       </Card.Body>

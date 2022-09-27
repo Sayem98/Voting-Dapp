@@ -19,10 +19,14 @@ function EthProvider({ children }) {
       } catch (err) {
         console.error(err);
       }
+      //console.log(voter);
+      const { abi: voter_abi } = voter;
       let voter_address, voter_contract;
       try {
         voter_address = voter.networks[networkID].address;
-        voter_contract = new web3.eth.Contract(abi, voter_address);
+        //console.log(voter_address);
+        //console.log(voter_abi);
+        voter_contract = new web3.eth.Contract(voter_abi, voter_address);
       } catch (err) {
         console.error(err);
       }
@@ -30,6 +34,7 @@ function EthProvider({ children }) {
         type: actions.init,
         data: { artifact, web3, accounts, networkID, contract, voter_contract },
       });
+      console.log(voter_contract._address);
     }
   }, []);
 
