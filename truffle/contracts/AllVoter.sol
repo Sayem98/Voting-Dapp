@@ -4,7 +4,8 @@ pragma solidity >=0.4.22 <0.9.0;
 contract AllVoter{
     struct Voter{
         uint id;
-        //Other info if needed
+        string name;
+        //Other info if needed;
     }
 
     address private immutable Owner;
@@ -18,9 +19,22 @@ contract AllVoter{
     constructor(){
         Owner = msg.sender;
     }
-
+    
     function addVoter(address _voter, uint _id) external {
         require(Owner == msg.sender, 'You are not allowed.');
+        for(uint i; i<numberOfVoter; i++){
+            if(voters[_voter].id != _id){
+                revert('Voter already exist.');
+            } 
+        }
+        //Checking if the NID is already registered
+        if(voters[_voter].id == 0){
+            voters[_voter] = Voter(_id, 'Voter');
+            numberOfVoter++;
+            emit NewVoterEvent(_voter, _id);
+        }
+        //Checking for the voter's address already connected with a voter
+        require(voters[_voter].id == 0, 'Voter already exist.');
 
         Voter storage voter = voters[_voter];
 
@@ -30,15 +44,13 @@ contract AllVoter{
         emit NewVoterEvent(_voter, _id);
 
     }
-
-    function Check(uint _id, address _owner) external view returns(bool isOwnder){
+        
+    
+    function Check(address _owner, uint _id) external view returns(bool isOwner){
+        //Getting voter instance from the mapping
         Voter storage voter = voters[_owner];
         if(voter.id == _id){
-            isOwnder = true;
+            isOwner = true;
         }
     }
-
-    
-
-    
 }
