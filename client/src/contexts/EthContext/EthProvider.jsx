@@ -7,6 +7,7 @@ function EthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const init = useCallback(async (artifact, voter) => {
+    console.log(voter);
     if (artifact && voter) {
       const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
       const accounts = await web3.eth.requestAccounts();
@@ -32,9 +33,17 @@ function EthProvider({ children }) {
       }
       dispatch({
         type: actions.init,
-        data: { artifact, web3, accounts, networkID, contract, voter_contract },
+        data: {
+          artifact,
+          web3,
+          accounts,
+          networkID,
+          contract,
+          voter, // voter contract artifact
+          voter_contract, // voter contract instance
+        },
       });
-      console.log(voter_contract._address);
+      //console.log(voter_contract._address);
     }
   }, []);
 
@@ -55,14 +64,15 @@ function EthProvider({ children }) {
   useEffect(() => {
     const events = ["chainChanged", "accountsChanged"];
     const handleChange = () => {
-      init(state.artifact);
+      init(state.artifact, state.voter);
+      console.log("changed");
     };
 
     events.forEach((e) => window.ethereum.on(e, handleChange));
     return () => {
       events.forEach((e) => window.ethereum.removeListener(e, handleChange));
     };
-  }, [init, state.artifact]);
+  }, [init, state.artifact, state.voter]);
 
   return (
     <EthContext.Provider

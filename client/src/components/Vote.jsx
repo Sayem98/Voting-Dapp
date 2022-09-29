@@ -12,8 +12,15 @@ function Vote() {
   const [candidates, setCandidates] = useState([]);
   const [isStarted, setIsStarted] = React.useState(false);
   const [err, setErr] = React.useState();
-
+  // eslint-disable-next-line
+  const [account, setAccount] = React.useState();
+  const [change, setChange] = useState(false);
   useEffect(() => {
+    const subscribe = async () => {
+      await contract.events.VotingStartedEvent((error, event) => {
+        setChange(!change);
+      });
+    };
     const getCandidates = async () => {
       const numberOfCandidates = await contract.methods
         .numberOfCandidates()
@@ -24,6 +31,10 @@ function Vote() {
       }
       setCandidates(_candidates);
     };
+    if (accounts) {
+      subscribe();
+      setAccount(accounts[0]);
+    }
 
     const isStarted = async () => {
       try {
@@ -38,19 +49,20 @@ function Vote() {
       getCandidates();
       isStarted();
     }
-  }, [contract]);
+  }, [contract, accounts, account, change]);
   const handleClick = async () => {
     if (contract) {
       try {
         await contract.methods.startVoting().send({ from: accounts[0] });
       } catch (err) {
         console.log(err);
-        setErr("Only admin can start vote");
+        setErr(err.message);
       }
     }
   };
   return (
     <div className={classes.vote}>
+      <p>{account ? account : "Waiting"}</p>
       {isStarted ? (
         <p>Started</p>
       ) : (

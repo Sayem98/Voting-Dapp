@@ -24,6 +24,7 @@ contract Voting is IVote{
 
 
     event VoteEvent(address indexed candidate);
+    event VotingStartedEvent(uint indexed endTime);
 
     constructor(address contractVoter){
         admin = msg.sender;
@@ -34,6 +35,7 @@ contract Voting is IVote{
         require(msg.sender == admin, "Only admin can start voting");
         isVotingStarted = true;
         endTime = block.timestamp + 30 minutes;
+        emit VotingStartedEvent(endTime);
     }
 
 
