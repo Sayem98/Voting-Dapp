@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import './IVote.sol';
 import './AllVoter.sol';
 
-contract Voting is IVote{
+contract Voting{
     address private admin;
 
     //Finally cadidates will come from candidate selection procces.
@@ -40,20 +39,20 @@ contract Voting is IVote{
 
 
 
-    function Vote(address candidate, uint NID) external{
+    function Vote(address candidate, string memory NID) external{
         require(isVotingStarted == true, 'Voting is not started');
         require(block.timestamp<=endTime, 'Can not vote');
         require(isVoted[msg.sender] == false, 'Already voted');
-        // if(Voter.Check(NID, msg.sender) == false){
-        //     revert('Not your ID');
-        // }
-        
+        // (string memory id, ) = Voter.voters(msg.sender);
+        // //Checking if the address owns the NID ?? !Problem
+        // // if(keccak256(abi.encodePacked(id)) != keccak256(abi.encodePacked(NID))){
+        // //     revert('Not your ID');
+        // // }
         require(endTime >= block.timestamp, 'Voting is over');
-        NID = NID;
         uint count;
         for(uint i;i<numberOfCandidates;i++){
-            if(candidate != candidates[i]){
-                count++;
+             if(candidate != candidates[i]){
+                 count++;
             }
         }
 

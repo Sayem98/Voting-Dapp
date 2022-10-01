@@ -7,11 +7,12 @@ import Button from "react-bootstrap/Button";
 function Vote() {
   const {
     // eslint-disable-next-line
-    state: { contract, accounts, web3 },
+    state: { contract, accounts, web3, voter_contract },
   } = useEth();
   const [candidates, setCandidates] = useState([]);
   const [isStarted, setIsStarted] = React.useState(false);
   const [err, setErr] = React.useState();
+  const [NID, setNID] = React.useState();
   // eslint-disable-next-line
   const [account, setAccount] = React.useState();
   const [change, setChange] = useState(false);
@@ -31,6 +32,14 @@ function Vote() {
       }
       setCandidates(_candidates);
     };
+
+    const getNID = async () => {
+      const NID = await voter_contract.methods.voters(accounts[0]).call({
+        from: accounts[0],
+      });
+      console.log(NID.id);
+      setNID(NID.id);
+    };
     if (accounts) {
       subscribe();
       setAccount(accounts[0]);
@@ -45,11 +54,14 @@ function Vote() {
         console.log(err);
       }
     };
+    if (voter_contract && accounts) {
+      getNID();
+    }
     if (contract) {
       getCandidates();
       isStarted();
     }
-  }, [contract, accounts, account, change]);
+  }, [contract, accounts, account, change, voter_contract]);
   const handleClick = async () => {
     if (contract) {
       try {
@@ -62,7 +74,7 @@ function Vote() {
   };
   return (
     <div className={classes.vote}>
-      <p>{account ? account : "Waiting"}</p>
+      <p>{NID !== "" ? "NID:" + NID : "Not a Voter Yet"}</p>
       {isStarted ? (
         <p>Started</p>
       ) : (
@@ -80,7 +92,7 @@ function Vote() {
 
       <div className={classes.candidates}>
         {candidates.map((candidate, index) => (
-          <Candidate candidate={candidate} NID="109" key={index} />
+          <Candidate candidate={candidate} NID={NID} key={index} />
         ))}
       </div>
     </div>
