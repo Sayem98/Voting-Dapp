@@ -12,6 +12,7 @@ contract AllVoter{
     uint public numberOfVoter;
 
     mapping(address=>Voter) public voters;
+    uint[] public ids; 
 
 
     event NewVoterEvent(address indexed addr, uint indexed id);
@@ -23,15 +24,9 @@ contract AllVoter{
     function addVoter(address _voter, uint _id) external {
         require(Owner == msg.sender, 'You are not allowed.');
         for(uint i; i<numberOfVoter; i++){
-            if(voters[_voter].id != _id){
+            if(ids[i] == _id){
                 revert('Voter already exist.');
             } 
-        }
-        //Checking if the NID is already registered
-        if(voters[_voter].id == 0){
-            voters[_voter] = Voter(_id, 'Voter');
-            numberOfVoter++;
-            emit NewVoterEvent(_voter, _id);
         }
         //Checking for the voter's address already connected with a voter
         require(voters[_voter].id == 0, 'Voter already exist.');
@@ -39,6 +34,7 @@ contract AllVoter{
         Voter storage voter = voters[_voter];
 
         voter.id = _id;
+        ids.push(_id);
         numberOfVoter = numberOfVoter + 1;
 
         emit NewVoterEvent(_voter, _id);

@@ -42,7 +42,7 @@ contract CandidateSelection{
     function Vote(address candidate, uint NID) external{
         // require(block.timestamp>=startTime && block.timestamp<=endTime, 'Can not vote');
         require(isVoted[msg.sender] == false, 'Already voted');
-        if(Voter.Check(NID, msg.sender) == false){
+        if(Voter.Check(msg.sender, NID) == false){
             revert('Not your ID');
         }
 
