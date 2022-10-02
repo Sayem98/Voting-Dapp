@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 function Voter() {
   const {
     // eslint-disable-next-line
-    state: { contract, accounts, web3, voter_contract },
+    state: { contract, accounts },
   } = useEth();
   const [numberOfVoters, setNumberOfVoters] = React.useState([]);
   const [change, setChange] = React.useState(false);
@@ -16,23 +16,19 @@ function Voter() {
 
   useEffect(() => {
     const getVoterNumber = async () => {
-      const numberOfVoters = await voter_contract.methods
-        .numberOfVoter()
-        .call();
+      const numberOfVoters = await contract.methods.numberOfVoter().call();
       setNumberOfVoters(numberOfVoters);
     };
 
-    if (voter_contract) {
+    if (contract) {
       getVoterNumber();
     }
-  }, [voter_contract, change]);
+  }, [contract, change]);
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await voter_contract.methods
-        .addVoter(address, NID)
-        .send({ from: accounts[0] });
+      await contract.methods.addVoter(address, NID).send({ from: accounts[0] });
       setChange(!change);
     } catch (err) {
       console.log(err);

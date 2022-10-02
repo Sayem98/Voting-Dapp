@@ -8,7 +8,7 @@ function EthProvider({ children }) {
 
   const init = useCallback(async (artifact, voter) => {
     console.log(voter);
-    if (artifact && voter) {
+    if (artifact) {
       const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
       const accounts = await web3.eth.requestAccounts();
       const networkID = await web3.eth.net.getId();
@@ -20,17 +20,7 @@ function EthProvider({ children }) {
       } catch (err) {
         console.error(err);
       }
-      //console.log(voter);
-      const { abi: voter_abi } = voter;
-      let voter_address, voter_contract;
-      try {
-        voter_address = voter.networks[networkID].address;
-        //console.log(voter_address);
-        //console.log(voter_abi);
-        voter_contract = new web3.eth.Contract(voter_abi, voter_address);
-      } catch (err) {
-        console.error(err);
-      }
+
       dispatch({
         type: actions.init,
         data: {
@@ -39,8 +29,6 @@ function EthProvider({ children }) {
           accounts,
           networkID,
           contract,
-          voter, // voter contract artifact
-          voter_contract, // voter contract instance
         },
       });
       //console.log(voter_contract._address);
@@ -64,7 +52,7 @@ function EthProvider({ children }) {
   useEffect(() => {
     const events = ["chainChanged", "accountsChanged"];
     const handleChange = () => {
-      init(state.artifact, state.voter);
+      init(state.artifact);
       console.log("changed");
     };
 

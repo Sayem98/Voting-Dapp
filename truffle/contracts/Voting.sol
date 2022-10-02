@@ -3,7 +3,7 @@ pragma solidity >=0.4.22 <0.9.0;
 
 import './AllVoter.sol';
 
-contract Voting{
+contract Voting is AllVoter{
     address private admin;
 
     //Finally cadidates will come from candidate selection procces.
@@ -16,7 +16,7 @@ contract Voting{
 
     bool public isVotingStarted = false;
     uint public endTime;
-    AllVoter public Voter;
+    
 
     
     
@@ -25,9 +25,9 @@ contract Voting{
     event VoteEvent(address indexed candidate);
     event VotingStartedEvent(uint indexed endTime);
 
-    constructor(address contractVoter){
+    constructor(){
         admin = msg.sender;
-        Voter = AllVoter(contractVoter);
+        
     }
 
     function startVoting() external {
@@ -43,12 +43,12 @@ contract Voting{
         require(isVotingStarted == true, 'Voting is not started');
         require(block.timestamp<=endTime, 'Can not vote');
         require(isVoted[msg.sender] == false, 'Already voted');
-        // (string memory id, ) = Voter.voters(msg.sender);
-        // //Checking if the address owns the NID ?? !Problem
-        // // if(keccak256(abi.encodePacked(id)) != keccak256(abi.encodePacked(NID))){
-        // //     revert('Not your ID');
-        // // }
         require(endTime >= block.timestamp, 'Voting is over');
+
+        Voter storage voter = voters[msg.sender];
+        if(keccak256(abi.encodePacked(voter.id))  == keccak256(abi.encodePacked(NID)) == false){
+            revert('You are not a voter');
+        }
         uint count;
         for(uint i;i<numberOfCandidates;i++){
              if(candidate != candidates[i]){

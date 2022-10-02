@@ -41,15 +41,6 @@ contract AllVoter{
         emit NewVoterEvent(_voter, _id);
 
     }
-        
-    
-    function Check(address _owner, string memory NID) external view returns(bool isVoter){
-        //Getting voter instance from the mapping
-        Voter storage voter = voters[_owner];
-        if(keccak256(abi.encodePacked(voter.id))  == keccak256(abi.encodePacked(NID))){
-            return true;
-        }
-    }
 
     function getNID() public view returns(string memory NID){
         Voter storage voter = voters[msg.sender];

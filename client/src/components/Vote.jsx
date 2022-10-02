@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 function Vote() {
   const {
     // eslint-disable-next-line
-    state: { contract, accounts, web3, voter_contract },
+    state: { contract, accounts },
   } = useEth();
   const [candidates, setCandidates] = useState([]);
   const [isStarted, setIsStarted] = React.useState(false);
@@ -34,7 +34,7 @@ function Vote() {
     };
 
     const getNID = async () => {
-      const NID = await voter_contract.methods.voters(accounts[0]).call({
+      const NID = await contract.methods.voters(accounts[0]).call({
         from: accounts[0],
       });
       console.log(NID.id);
@@ -54,14 +54,14 @@ function Vote() {
         console.log(err);
       }
     };
-    if (voter_contract && accounts) {
+    if (contract && accounts) {
       getNID();
     }
     if (contract) {
       getCandidates();
       isStarted();
     }
-  }, [contract, accounts, account, change, voter_contract]);
+  }, [contract, accounts, account, change]);
   const handleClick = async () => {
     if (contract) {
       try {
