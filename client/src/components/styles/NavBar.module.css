@@ -1,0 +1,21 @@
+.navbar {
+  margin: auto;
+  margin-top: 1%;
+  border-radius: 10px;
+  width: 90%;
+  font-size: 1.5vw;
+  opacity: 70%;
+}
+.navItem {
+  text-decoration: none;
+  color: black;
+
+  border-radius: 10px;
+  padding: 0.3rem;
+}
+
+.navbar:hover {
+  opacity: 100%;
+  cursor: default;
+  font-weight: 700;
+}

@@ -1,0 +1,76 @@
+.container_vote {
+  background-color: #282c34;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 6%;
+  border-radius: 10px;
+  /* box-shadow: 0 0 20px rgba(215, 199, 199, 0.5); */
+  padding: 0rem 5rem;
+}
+.container_vote p {
+  font-size: 1.5vw;
+}
+
+.vote_container {
+  width: 55%;
+  height: 80%;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 70%;
+  font-size: 2.5vw;
+  padding: 2rem;
+}
+.vote_container h1 {
+  border: 5px solid rgb(65, 177, 65);
+  width: 90%;
+  border-radius: 10px;
+  text-align: center;
+}
+.vote_container input {
+  border-radius: 10px;
+  text-align: center;
+  width: 75%;
+  height: 10%;
+}
+.vote_container:hover {
+  opacity: 100%;
+  box-shadow: 0 0 20px rgba(215, 199, 199, 1);
+  font-weight: 700;
+  color: green;
+}
+
+.votted_container {
+  width: 30%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 2.5vw;
+  padding: 2rem;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  opacity: 70%;
+}
+
+div.votted_container:hover {
+  opacity: 100%;
+  color: green;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(215, 199, 199, 1);
+}
+
+.button {
+  width: 27%;
+  height: 15%;
+  font-size: 2vw;
+  margin-left: 60%;
+}
