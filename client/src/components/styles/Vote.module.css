@@ -44,7 +44,6 @@
   opacity: 100%;
   box-shadow: 0 0 20px rgba(215, 199, 199, 1);
   font-weight: 700;
-  color: green;
 }
 
 .votted_container {
@@ -63,7 +62,6 @@
 
 div.votted_container:hover {
   opacity: 100%;
-  color: green;
   font-weight: 700;
   box-shadow: 0 0 20px rgba(215, 199, 199, 1);
 }
