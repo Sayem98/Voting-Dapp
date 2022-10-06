@@ -8,7 +8,7 @@ function CustomRoutes() {
     <Routes>
       <Route path="/" element={<Vote />} />
       <Route path="/voter" element={<Voter />} />
-      <Route path="/candidate/selection" element={<Candidate />} />
+      <Route path="/candidate" element={<Candidate />} />
     </Routes>
   );
 }
