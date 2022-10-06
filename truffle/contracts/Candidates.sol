@@ -26,6 +26,8 @@ contract Candidates{
     // We need a variable to store the candidates count
     uint public candidatesCount;
 
+    //events
+    event candidateAdded(address indexed candidateAddress, string indexed NID, string name, string logo);
     constructor(){
 
     }
@@ -45,6 +47,8 @@ contract Candidates{
         candidatesCount++;
         candidates[msg.sender] = Candidate(_NID, _name, _logo);
         candidateList.push(msg.sender);
+
+        emit candidateAdded(msg.sender, _NID, _name, _logo);
     }
 
 
