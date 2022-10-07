@@ -108,9 +108,13 @@ function Vote() {
         </Button>
       </div>
 
-      <div className={classes.votted_container}>
+      <div
+        className={isStarted ? classes.vote_started : classes.votted_container}
+      >
         {isStarted ? (
-          <p>Voting Started</p>
+          <>
+            <p>Voting Started</p>
+          </>
         ) : (
           <>
             <Button

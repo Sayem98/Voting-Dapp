@@ -14,8 +14,7 @@ contract Candidates{
     
     // We need a struct to store the candidate details
     struct Candidate{
-        string id;
-        string name;
+        uint id;
         string logo;
     }
 
@@ -27,28 +26,28 @@ contract Candidates{
     uint public candidatesCount;
 
     //events
-    event candidateAdded(address indexed candidateAddress, string indexed NID, string name, string logo);
+    event candidateAdded(address indexed candidateAddress, uint indexed NID, string logo);
     constructor(){
 
     }
 
     // We need a function to add a candidate
-    function addCandidate(string memory _NID, string memory _name, string memory _logo) public payable{
+    function addCandidate(uint _NID, string memory _logo) public payable{
         //Check if the candidate is already added?
-        require(keccak256(abi.encodePacked(candidates[msg.sender].id))  == keccak256(abi.encodePacked("")), "Candidate already added");
-
+        // require(keccak256(abi.encodePacked(candidates[msg.sender].id))  == keccak256(abi.encodePacked("")), "Candidate already added");
+        require(candidates[msg.sender].id == 0, "Candidate already added");
 
         //Check the ammount of money is valid?
-        require(msg.value == 1 ether, "You need to pay 1 ether to be a candidate");
+        require(msg.value == 100000000000000000, "You need to pay 1 ether to be a candidate");
 
 
 
         //Add the candidate
         candidatesCount++;
-        candidates[msg.sender] = Candidate(_NID, _name, _logo);
+        candidates[msg.sender] = Candidate(_NID, _logo);
         candidateList.push(msg.sender);
 
-        emit candidateAdded(msg.sender, _NID, _name, _logo);
+        emit candidateAdded(msg.sender, _NID, _logo);
     }
 
 

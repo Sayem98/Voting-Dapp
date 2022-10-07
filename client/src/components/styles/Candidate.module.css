@@ -16,7 +16,7 @@
   text-align: center;
 }
 .form {
-  width: 60%;
+  width: 40%;
   background-color: whitesmoke;
   border-radius: 10px;
   height: 80vh;
@@ -33,7 +33,7 @@
 }
 .candidates {
   background-color: whitesmoke;
-  width: 35%;
+  width: 55%;
   height: 80vh;
   border-radius: 10px;
   margin-left: 1%;
