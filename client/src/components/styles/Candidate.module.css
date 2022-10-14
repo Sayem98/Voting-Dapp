@@ -23,14 +23,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  opacity: 70%;
+  /* opacity: 70%; */
   padding: 1rem;
 }
 
-.form:hover {
+/* .form:hover {
   opacity: 100%;
   box-shadow: 0 0 20px rgba(215, 199, 199, 1);
-}
+} */
 .candidates {
   background-color: whitesmoke;
   width: 55%;
@@ -41,14 +41,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  opacity: 70%;
+  /* opacity: 70%; */
   padding: 0.5rem;
   flex-wrap: wrap;
 }
-.candidates:hover {
+/* .candidates:hover {
   opacity: 100%;
   box-shadow: 0 0 20px rgba(215, 199, 199, 1);
-}
+} */
 
 .candidate {
   display: flex;

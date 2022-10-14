@@ -4,7 +4,7 @@
   border-radius: 10px;
   width: 90%;
   font-size: 1.5vw;
-  opacity: 70%;
+  /* opacity: 70%; */
 }
 .navItem {
   text-decoration: none;
@@ -14,8 +14,8 @@
   padding: 0.3rem;
 }
 
-.navbar:hover {
+/* .navbar:hover {
   opacity: 100%;
   cursor: default;
   font-weight: 700;
-}
+} */

@@ -40,10 +40,10 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  opacity: 70%;
+  /* opacity: 70%; */
 }
 
-.form:hover {
+/* .form:hover {
   opacity: 100%;
   box-shadow: 0 0 20px rgba(215, 199, 199, 1);
-}
+} */
